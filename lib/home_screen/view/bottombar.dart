@@ -9,8 +9,8 @@ class BottomBar extends StatelessWidget {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    const Center(child: Text("Revenue")),
-    const Center(child: Text("History")),
+    HomeScreen(),
+    HomeScreen(),
     const ProfileScreen(),
   ];
 

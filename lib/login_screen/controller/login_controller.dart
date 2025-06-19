@@ -17,7 +17,7 @@ class LoginController extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
-  
+
   Future<void> login(BuildContext context) async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
@@ -48,9 +48,10 @@ class LoginController extends ChangeNotifier {
         await prefs.setString('name', data['name'] ?? 'User');
 
         // Navigate to home screen
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => BottomBar()),
+          (route) => false,
         );
       } else {
         _errorMessage = data['message'] ?? 'Login failed';
