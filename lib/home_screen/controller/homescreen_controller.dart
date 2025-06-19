@@ -25,9 +25,6 @@ class HomescreenController extends ChangeNotifier {
   }
 
   Future<void> fetchBalance() async {
-    // const String api =
-    //     "https://seclobbackendapi.seclob.com/v1/cPartner/wallet/balance";
-
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();

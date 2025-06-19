@@ -17,10 +17,7 @@ class LoginController extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
-
-  // static const String _loginUrl =
-  //     'https://seclobbackendapi.seclob.com/v1/cPartner-no/auth/login';
-
+  
   Future<void> login(BuildContext context) async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();

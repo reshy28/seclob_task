@@ -41,6 +41,12 @@ class OnboardingScreen extends StatelessWidget {
           builder: (context, state, child) {
             return Stack(
               children: [
+                Positioned.fill(
+                  child: Image.asset(
+                    AppImages.onBoardingBackground,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 // Page View
                 PageView(
                   controller: state.pageController,

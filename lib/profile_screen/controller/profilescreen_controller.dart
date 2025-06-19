@@ -15,9 +15,6 @@ class ProfilescreenController extends ChangeNotifier {
 
   List<UserData> profileDatas = [];
   Future<void> fetchProfileDetails() async {
-    // const String api =
-    //     "https://seclobbackendapi.seclob.com/v1/cPartner/user/details";
-
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -44,7 +41,6 @@ class ProfilescreenController extends ChangeNotifier {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final UserDetailsModel datas = UserDetailsModel.fromJson(responseData);
         profileDatas = [datas.data!];
-        // profileDatas = datas;
       } else {
         _errorMessage = 'Failed to fetch balance: ${response.statusCode}';
       }

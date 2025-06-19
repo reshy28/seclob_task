@@ -11,7 +11,7 @@ class SplashController with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('accessToken');
 
-    await Future.delayed(const Duration(seconds: 2)); // optional splash delay
+    await Future.delayed(const Duration(seconds: 2)); 
 
     if (token != null && token.isNotEmpty) {
       _isLoggedIn = true;

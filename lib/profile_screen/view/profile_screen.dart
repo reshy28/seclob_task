@@ -17,115 +17,121 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final profilescrenObj = Provider.of<ProfilescreenController>(context);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        leading: Icon(Icons.arrow_back, color: Colors.white),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: AppColors.primary,
+          leading: Icon(Icons.arrow_back, color: Colors.white),
 
-        elevation: 0,
-      ),
-      body: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            child: Container(
+          elevation: 0,
+        ),
+        body: Column(
+          children: [
+            Container(
+              width: double.infinity,
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.deepPurpleAccent,
-                borderRadius: BorderRadius.circular(20),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: profilescrenObj.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : profilescrenObj.profileDatas.isEmpty
+                    ? const Text(
+                        "No user data available",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    : Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: 30,
+                            backgroundImage: AssetImage(AppImages.avatarImage),
+                          ),
+                          const SizedBox(width: 16),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                profilescrenObj.profileDatas.first.name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                profilescrenObj.profileDatas.first.email,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
               ),
-              child: profilescrenObj.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : profilescrenObj.profileDatas.isEmpty
-                  ? const Text(
-                      "No user data available",
-                      style: TextStyle(color: Colors.white),
-                    )
-                  : Row(
-                      children: [
-                        const CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage(AppImages.avatarImage),
-                        ),
-                        const SizedBox(width: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              profilescrenObj.profileDatas.first.name,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              profilescrenObj.profileDatas.first.email,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.white70,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
             ),
-          ),
 
-          // Settings Section
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              children: [
-                const Text(
-                  "Account",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            // Settings Section
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
                 ),
+                children: [
+                  const Text(
+                    "Account",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
 
-                const SizedBox(height: 20),
-                customProfileItem(
-                  title: "Profile",
-                  icon: IconlyLight.profile,
-                  onTap: () {},
-                ),
-                customSwitchItem(
-                  title: "Darkmode",
-                  icon: Icons.brightness_2_outlined,
-                ),
-                customSwitchItem(
-                  title: "Notification",
-                  icon: IconlyLight.notification,
-                ),
-                customProfileItem(
-                  title: "Bank Account",
-                  icon: Icons.account_balance_outlined,
-                  onTap: () {},
-                ),
-                customProfileItem(
-                  title: "Help & Support",
-                  icon: Icons.headset_mic_outlined,
-                  onTap: () {},
-                ),
-                customProfileItem(
-                  title: "Consumer policies",
-                  icon: Icons.assignment_turned_in_outlined,
-                  onTap: () {},
-                ),
-                customProfileItem(
-                  title: "Log out",
-                  textColor: Colors.red,
-                  icon: Icons.logout_outlined,
-                  iconColor: Colors.red,
-                  showTrailing: false,
-                  onTap: showLogoutDialog,
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  customProfileItem(
+                    title: "Profile",
+                    icon: IconlyLight.profile,
+                    onTap: () {},
+                  ),
+                  customSwitchItem(
+                    title: "Darkmode",
+                    icon: Icons.brightness_2_outlined,
+                  ),
+                  customSwitchItem(
+                    title: "Notification",
+                    icon: IconlyLight.notification,
+                  ),
+                  customProfileItem(
+                    title: "Bank Account",
+                    icon: Icons.account_balance_outlined,
+                    onTap: () {},
+                  ),
+                  customProfileItem(
+                    title: "Help & Support",
+                    icon: Icons.headset_mic_outlined,
+                    onTap: () {},
+                  ),
+                  customProfileItem(
+                    title: "Consumer policies",
+                    icon: Icons.assignment_turned_in_outlined,
+                    onTap: () {},
+                  ),
+                  customProfileItem(
+                    title: "Log out",
+                    textColor: Colors.red,
+                    icon: Icons.logout_outlined,
+                    iconColor: Colors.red,
+                    showTrailing: false,
+                    onTap: showLogoutDialog,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
